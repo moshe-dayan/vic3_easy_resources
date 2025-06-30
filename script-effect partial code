@@ -1,0 +1,32 @@
+zw_effect_add_resource = {
+	if = {
+		limit = {
+			has_variable = zw_var_add_$resource_1$
+		}
+		if = {
+			limit = {
+				OR = {
+					gold_reserves > 0
+					NOT = { has_variable = zw_var_add_resource_debt_control }
+				}
+			}
+			random_list = {
+				90 = {}
+				10 = {
+					change_variable = {
+						name = zw_var_count_1_$resource_1$
+						add = zw_value_max_level_change_$resource_1$
+					}
+					if = {
+						limit = { has_modifier = zw_modifier_add_$resource_1$ }
+						remove_modifier = zw_modifier_add_$resource_1$
+					}
+					add_modifier = {
+						name = zw_modifier_add_$resource_1$
+						multiplier = root.var:zw_var_count_1_$resource_1$
+					}
+				}
+			}
+		}
+	}
+}
