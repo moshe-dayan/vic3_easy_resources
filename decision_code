@@ -1,0 +1,41 @@
+AddRes_Wood_Decision = {
+	is_shown = {
+		has_variable = openEasyResources_var
+	}
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		every_scope_state = {
+			limit = {
+				has_decree = fs_er_markstate
+			}
+			activate_building = { building = { building_logging_camp_fs } }
+			if = {
+				limit = { NOT = { has_local_variable = fs_var_count_1_wood } }
+				set_local_variable = {
+					name = fs_var_count_1_wood
+					value = 0
+				}
+			}
+			change_local_variable = {
+				name = fs_var_count_1_wood
+				add = 1
+			}
+			if = {
+				limit = { has_modifier = fs_modifier_add_wood }
+				remove_modifier = fs_modifier_add_wood
+			}
+			add_modifier = {
+				name = fs_modifier_add_wood
+				multiplier = fs_var_count_1_wood
+			}
+			if = {
+				limit = {
+					NOT = { has_variable = fs_var_permit_wood }
+				}
+				set_variable = fs_var_permit_wood  # variable to trigger potential
+			}
+		}
+	}
+}
